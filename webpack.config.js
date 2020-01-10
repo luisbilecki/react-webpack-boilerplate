@@ -1,21 +1,35 @@
 const path = require('path');
 
+const PATH_SOURCE = path.join(__dirname, './src');
+const PATH_PUBLIC = path.join(__dirname, 'public');
+const PATH_DIST = path.join(PATH_PUBLIC, 'dist');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // NEW LINE
 
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: './src/app.js',
+  entry: path.join(PATH_SOURCE, 'app.js'),
   output: {
-    path: path.join(__dirname, 'public', 'dist'),
-    filename: 'bundle.js',
+    path: PATH_DIST,
+    filename: 'bundle.[hash].js',
   },
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'React Boilerplate',
+      filename: path.join(PATH_PUBLIC, 'index.html'),
+      template: path.join(PATH_SOURCE, 'index.html'),
+    }),
+  ],
   module: {
     rules: [
       {
@@ -38,7 +52,7 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
+    contentBase: PATH_PUBLIC,
     historyApiFallback: true,
     publicPath: '/dist/',
     port: 3000,
