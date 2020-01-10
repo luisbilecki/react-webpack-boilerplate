@@ -23,7 +23,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+    }),
     new HtmlWebpackPlugin({
       title: 'React Boilerplate',
       filename: path.join(PATH_PUBLIC, 'index.html'),
