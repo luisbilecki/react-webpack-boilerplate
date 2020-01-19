@@ -16,7 +16,7 @@ module.exports = {
   entry: path.join(PATH_SOURCE, 'app.js'),
   output: {
     path: PATH_DIST,
-    filename: 'bundle.[hash].js',
+    filename: devMode ? 'bundle.js' : 'bundle.[hash].js',
   },
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
@@ -24,7 +24,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
+      filename: devMode ? '[name].css' : '[name].[hash].css',
     }),
     new HtmlWebpackPlugin({
       title: 'React Boilerplate',
