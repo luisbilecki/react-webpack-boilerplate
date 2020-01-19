@@ -13,7 +13,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // NEW LINE
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-  entry: path.join(PATH_SOURCE, 'app.js'),
+  entry: { main: ['@babel/polyfill', path.join(PATH_SOURCE, 'index.jsx')] },
   output: {
     path: PATH_DIST,
     filename: devMode ? 'bundle.js' : 'bundle.[hash].js',
@@ -57,7 +57,7 @@ module.exports = {
     contentBase: PATH_PUBLIC,
     historyApiFallback: true,
     publicPath: '/dist/',
-    port: 3000,
+    port: 8080,
     watchOptions: {
       pool: true,
     },
