@@ -32,6 +32,9 @@ module.exports = {
       template: path.join(PATH_SOURCE, 'index.html'),
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
