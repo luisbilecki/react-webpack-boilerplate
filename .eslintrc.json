@@ -5,6 +5,10 @@
     "commonjs": true,
     "es6": true
   },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
   "extends": ["airbnb-base", "prettier", "plugin:react/recommended"],
   "globals": {
     "Atomics": "readonly",
@@ -17,6 +21,12 @@
   "rules": {
     "prettier/prettier": "error",
     "no-console": "off",
-    "react/jsx-uses-react": 1
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "class-methods-use-this": "off",
+    "global-require": "off",
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/react-in-jsx-scope": 1
   }
 }
